@@ -15,10 +15,12 @@ import {
 import CommonHeader from '../Components/CommonHeader';
 import { useNavigation } from '@react-navigation/native';
 import { useBehavior } from '../../Hooks/useBehaviour';
+import { Menu, MenuOptions, MenuOption, MenuTrigger, MenuContext } from 'react-native-popup-menu';
 
 const ChatScreen = () => {
   const navigation = useNavigation();
   const [message, setMessage] = useState('');
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const behavior = useBehavior();
 
@@ -36,13 +38,30 @@ const ChatScreen = () => {
       showBackButton={true}
       onBackPress={() => navigation.goBack()}
       showMenu={true}
-      onMenuPress={() => console.log('Menu pressed')}
+      onMenuPress={() => setMenuVisible(true)}
       showName={true}
       showLastSeen={true}
     />
   );
 
+   const onSelectMenuOption = (value: string) => {
+    setMenuVisible(false);
+    switch (value) {
+      case 'settings':
+        console.log('Settings selected');
+        break;
+      case 'export':
+        console.log('Export selected');
+        break;
+      case 'clear':
+        console.log('Clear chat selected');
+       
+        break;
+    }
+  };
+
   return (
+    <MenuContext>
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
         style={styles.container}
@@ -50,6 +69,15 @@ const ChatScreen = () => {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
       >
         {renderHeader()}
+
+         <Menu opened={menuVisible} onBackdropPress={() => setMenuVisible(false)}>
+            <MenuTrigger />
+            <MenuOptions>
+              <MenuOption onSelect={() => onSelectMenuOption('settings')} text="Settings" />
+              <MenuOption onSelect={() => onSelectMenuOption('export')} text="Export" />
+              <MenuOption onSelect={() => onSelectMenuOption('clear')} text="Clear chat" />
+            </MenuOptions>
+          </Menu>
 
         <View style={styles.inner}>
           <ScrollView
@@ -103,6 +131,7 @@ const ChatScreen = () => {
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
+    </MenuContext>
   );
 };
 

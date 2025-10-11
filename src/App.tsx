@@ -26,6 +26,7 @@ function App() {
         backgroundColor={'transparent'}
       />
       <SafeAreaProvider style={backgroundStyle}>
+        
         <NavigationContainers />
       </SafeAreaProvider>
     </GestureHandlerRootView>
