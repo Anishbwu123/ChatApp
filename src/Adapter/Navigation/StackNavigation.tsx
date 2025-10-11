@@ -1,0 +1,24 @@
+import {} from 'react-native';
+import React from 'react';
+import { ScreenParamList, Screens } from './screenTypes';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Splash from '../../View/Screens/Splash';
+import ChatScreen from '../../View/Screens/ChatScreen';
+import Chatlist from '../../View/Screens/Chatlist';
+
+const Stack = createStackNavigator<ScreenParamList>();
+const StackNavigation = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Screens.Splash}
+      screenOptions={{ headerShown: false, animation: 'slide_from_right' }}
+    >
+      <Stack.Screen name={Screens.Splash} component={Splash} />
+      <Stack.Screen name={Screens.ChatScreen} component={ChatScreen} />
+      <Stack.Screen name={Screens.Chatlist} component={Chatlist} />
+    </Stack.Navigator>
+  );
+};
+
+export default StackNavigation;
