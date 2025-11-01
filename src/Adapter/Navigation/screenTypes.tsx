@@ -3,6 +3,7 @@ export enum Screens {
   Splash = "Splash",
   Chatlist='Chatlist',
  ChatScreen='ChatScreen',
+ ResponsiveTest='ResponsiveTest',
 
  
 }
@@ -12,5 +13,6 @@ export type ScreenParamList = {
   [Screens.Splash]: undefined;
   [Screens.Chatlist]:{userId:string,userName:string,userPic:string};
   [Screens.ChatScreen]:undefined;
+  [Screens.ResponsiveTest]:undefined;
   
 };
